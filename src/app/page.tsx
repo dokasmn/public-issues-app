@@ -59,9 +59,11 @@
               className="form-input"
             >
               <option value="">Selecione...</option>
-              <option value="Buraco na rua">Buraco na rua</option>
-              <option value="Falta de iluminação">Falta de iluminação</option>
-              <option value="Falta de segurança">Falta de segurança</option>
+              <option value="Problemas na rua">Problemas na rua</option>
+              <option value="Problemas de equipamento público">Problemas de equipamento público</option>
+              <option value="Problemas de segurança">Problemas de segurança</option>
+              <option value="Problemas ambientais">Problemas ambientais</option>
+              <option value="Focos de dengue">Focos de dengue</option>
               <option value="Outro">Outro</option>
             </select>
           </label>
