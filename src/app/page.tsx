@@ -1,48 +1,61 @@
-  'use client'
+'use client'
 
-  import React, { useState } from 'react'
-  import { Input } from '@/components/ui/input'
-  import { Textarea } from '@/components/ui/textarea'
-  import { Button } from '@/components/ui/button'
-  import { supabase } from '@/lib/supabaseClient'
+import React, { useState } from 'react'
+import Link from 'next/link'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Button } from '@/components/ui/button'
+import { supabase } from '@/lib/supabaseClient'
 
-  export default function Home() {
-    const [formData, setFormData] = useState({
-      problem_type: '',
-      description: '',
-      location: '',
-    })
+export default function Home() {
+  const [formData, setFormData] = useState({
+    problem_type: '',
+    description: '',
+    location: '',
+  })
 
-    const [loading, setLoading] = useState(false)
-    const [success, setSuccess] = useState(false)
-    const [error, setError] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-      setFormData({ ...formData, [e.target.name]: e.target.value })
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    setError(null)
+    setSuccess(false)
+
+    const { error } = await supabase.from('public_issues').insert([formData])
+
+    if (error) {
+      setError('Erro ao enviar o problema. Tente novamente.')
+    } else {
+      setSuccess(true)
+      setFormData({
+        problem_type: '',
+        description: '',
+        location: '',
+      })
     }
+    setLoading(false)
+  }
 
-    const handleSubmit = async (e: React.FormEvent) => {
-      e.preventDefault()
-      setLoading(true)
-      setError(null)
-      setSuccess(false)
+  return (
+    <>
+      {/* Navbar */}
+      <nav className="navbar">
+        <h1 className="navbar-title">Gestão Pública</h1>
+        <Link href="/last-report" className="navbar-link">
+          Ver Relatórios
+        </Link>
+      </nav>
 
-      const { error } = await supabase.from('public_issues').insert([formData])
-
-      if (error) {
-        setError('Erro ao enviar o problema. Tente novamente.')
-      } else {
-        setSuccess(true)
-        setFormData({
-          problem_type: '',
-          description: '',
-          location: '',
-        })
-      }
-      setLoading(false)
-    }
-
-    return (
+      {/* Formulário */}
       <main className="form-container">
         <h1 className="form-title">Formulário de Reporte de Problema Público</h1>
         <p className="form-description">
@@ -100,5 +113,6 @@
           {error && <p className="form-error">{error}</p>}
         </form>
       </main>
-    )
-  }
+    </>
+  )
+}

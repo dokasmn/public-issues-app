@@ -1,6 +1,51 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Navbar */
+.navbar {
+  width: 100%;
+  background-color: #0070f3;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-title {
+  color: white;
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.navbar-link {
+  color: white;
+  background-color: transparent;
+  border: 1.5px solid white;
+  padding: 0.4rem 1rem;
+  border-radius: 3px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar-link:hover {
+  background-color: white;
+  color: #0070f3;
+  cursor: pointer;
+}
+
+/* Margem entre navbar e formulário */
 .form-container {
   max-width: 600px;
-  margin: 1rem auto;
+  margin: 2rem auto 1rem; /* topo maior (2rem), base 1rem */
   background-color: white;
   padding: 2rem;
   border: 1px solid #ddd;
@@ -9,6 +54,8 @@
   color: #333;
   border-radius: 4px;
 }
+
+/* Restante do seu CSS */
 
 .form-title {
   font-size: 1.6rem;
@@ -78,10 +125,10 @@
   font-size: 0.9rem;
 }
 
-/* Responsividade para telas menores */
+/* Responsividade atualizada */
 @media (max-width: 600px) {
   .form-container {
-    margin: 0.5rem;
+    margin: 1.5rem 1rem 1rem; /* menos topo na responsividade */
     padding: 1rem;
   }
 
@@ -101,5 +148,19 @@
   .form-button {
     font-size: 0.9rem;
     padding: 0.6rem 0.8rem;
+  }
+
+  /* Navbar adapta o padding para telas pequenas */
+  .navbar {
+    padding: 0.75rem 1rem;
+  }
+
+  .navbar-title {
+    font-size: 1.1rem;
+  }
+
+  .navbar-link {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.9rem;
   }
 }
