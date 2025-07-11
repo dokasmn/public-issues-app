@@ -33,6 +33,7 @@ export default function Home() {
     const { error } = await supabase.from('public_issues').insert([formData])
 
     if (error) {
+      console.log("eroooooooooooooooooooooooooooooooooooo");
       setError('Erro ao enviar o problema. Tente novamente.')
     } else {
       setSuccess(true)
